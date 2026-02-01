@@ -1,7 +1,6 @@
 ---
 name: adk-go-agent
-description: "Guide for building AI agents in Go using adk-go framework. Use when creating agents with Gemini or OpenAI models, implementing tools, running agents with streaming, or managing conversation sessions."
-Triggers: "Go agent development, adk-go, llmagent, google.golang.org/adk."
+description: "Guide for building AI agents in Go using adk-go framework. Use when creating agents with Gemini or OpenAI models, implementing tools, running agents with streaming, or managing conversation sessions. Triggers: Go agent development, adk-go, llmagent, google.golang.org/adk."
 ---
 
 # ADK-Go Agent Development
@@ -130,6 +129,14 @@ r, err := runner.New(runner.Config{
     AppName:        "my-app",
     Agent:          agent,
     SessionService: sessionService,
+})
+
+// Create session before running (required)
+_, err = sessionService.Create(ctx, &session.CreateRequest{
+    AppName:   "my-app",
+    UserID:    userID,
+    SessionID: sessionID,
+    State:     make(map[string]any),
 })
 
 // Run with streaming
